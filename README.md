@@ -65,7 +65,7 @@ GET /ask?q=<question>
 
 **Request:**
 ```bash
-curl "http://54.226.56.68:8000/ask?q=When%20is%20Layla%20planning%20her%20trip%20to%20London%3F"
+curl "http://54.226.56.68/ask?q=When%20is%20Layla%20planning%20her%20trip%20to%20London%3F"
 ```
 
 **Response:**
@@ -107,9 +107,9 @@ pip install -r requirements.txt
 python3 -m uvicorn main:app --reload
 ```
 
-Server will start at `http://54.226.56.68:8000`
+Server will start at `http://54.226.56.68`
 
-Access interactive docs: `http://54.226.56.68:8000/docs`
+Access interactive docs: `http://54.226.56.68/docs`
 
 ## Data Sources
 
@@ -332,3 +332,107 @@ python3 -m uvicorn main:app --reload
 6. **Feedback loop**: Learn from user corrections
 7. **Caching**: Cache repeated questions
 8. **Analytics**: Track question types and success rate
+
+## Bonus 2: Data Insights & Observed Anomalies
+
+During manual review of a subset of the 3,349-member message dataset, several practical inconsistencies and operational issues surfaced. These observations come from typical developer spot-checks and represent the kinds of real-world data imperfections that influence the design of the question-answering system.
+
+Although not an exhaustive audit, these findings highlight areas where validation, normalization, and operational workflows could be improved.
+
+ ### 1. Billing Irregularities & Duplicate Charges
+
+Several entries involve members flagging issues such as:
+
+- duplicate hotel or service charges
+
+- unexpected billing amounts
+
+- confusion around refunds or pending payments
+
+These inconsistencies often required support follow-ups, indicating that billing validation and reconciliation processes could benefit from additional safeguards.
+
+### 2. Contact Information Problems
+
+Across multiple messages, users submitted repeated updates to their contact details. A few patterns stood out:
+
+- email addresses missing "@" or domain parts
+
+- incomplete or incorrectly formatted phone numbers
+
+- repeated submissions of corrected addresses
+
+This suggests the need for stronger input validation and editable profile confirmation flows.
+
+### 3. Reservation Date & Timing Mix-Ups
+
+A large portion of user messages revolve around fixing or clarifying reservation details:
+
+- correcting booking dates
+
+- confirming time ranges
+
+- resolving time-zone misunderstandings
+
+- identifying missed or mismatched event times
+
+These patterns indicate that the current scheduling and confirmation workflow may not clearly communicate finalized booking information.
+
+### 4. Name Formatting & Encoding Issues
+
+Some records displayed issues where user names appeared improperly encoded or partially missing characters, for example:
+
+- "Hans Mller" instead of "Hans Müller"
+
+- inconsistent casing (uppercase/lowercase variations)
+
+- extra spaces or missing spacing between first and last names
+
+These inconsistencies suggest that Unicode normalization and stricter user name validation could improve data quality.
+
+### 5. Lost or Unconfirmed Bookings
+
+Message threads show repeated cases where users:
+
+- lost access to tickets
+
+- needed urgent re-confirmation
+
+- had incomplete itineraries
+
+- believed a reservation was made when it wasn’t fully processed
+
+This kind of uncertainty creates extra workload for support agents and highlights opportunities for automated confirmation checks.
+
+### 6. Repeated or Unusual Preference Requests
+
+Some users frequently emphasize specific preferences, such as:
+
+- dietary restrictions
+
+- seat types (aisle, window, premium)
+
+- loyalty point usage
+
+- specific in-room amenities
+
+These preferences appear inconsistently stored or recognized across interactions, resulting in repetitive clarification messages.
+
+### 7. Service or Experience Failures
+
+A handful of messages mention:
+
+- incorrect or missing amenities
+
+- payment failures
+
+- wrong gifts or surprise arrangements
+
+- disappointing service experiences (“artist didn’t meet expectations”, “reservation credentials didn’t work”)
+
+These notes usually triggered follow-up action, suggesting that automated validation or tighter coordination with vendors could reduce failures.
+
+## Summary
+
+Overall, the dataset reflects natural inconsistencies that appear in real member-support environments—ranging from data-entry issues to workflow gaps. Addressing these areas through better frontend validation, improved encoding handling, clearer booking confirmations, and consistent preference tracking could significantly reduce friction for both members and support teams.
+
+These insights also guided how this QA system was designed, especially in terms of handling incomplete inputs, inconsistent text formats, and ambiguous message context.
