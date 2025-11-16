@@ -65,7 +65,7 @@ GET /ask?q=<question>
 
 **Request:**
 ```bash
-curl "http://localhost:8000/ask?q=When%20is%20Layla%20planning%20her%20trip%20to%20London%3F"
+curl "http://54.226.56.68:8000/ask?q=When%20is%20Layla%20planning%20her%20trip%20to%20London%3F"
 ```
 
 **Response:**
@@ -107,9 +107,9 @@ pip install -r requirements.txt
 python3 -m uvicorn main:app --reload
 ```
 
-Server will start at `http://localhost:8000`
+Server will start at `http://54.226.56.68:8000`
 
-Access interactive docs: `http://localhost:8000/docs`
+Access interactive docs: `http://54.226.56.68:8000/docs`
 
 ## Data Sources
 

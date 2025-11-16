@@ -107,7 +107,7 @@ gunicorn -w 4 -k uvicorn.workers.UvicornWorker main:app
 
 ### API
 ```bash
-curl "http://localhost:8000/ask?q=When%20is%20Layla%20planning%20her%20trip%20to%20London%3F"
+curl "http://54.226.56.68:8000/ask?q=When%20is%20Layla%20planning%20her%20trip%20to%20London%3F"
 ```
 
 ## Alternative Approaches (Documented in README.md)
